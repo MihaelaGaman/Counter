@@ -29,13 +29,13 @@ int main(int argc, char * argv[]){
 	class Window w[N];
 
 	for(i=0; i<N; i++)
-		/* ok[i] == 1 => counter no i is open */
 		ok[i] = 0;
+	//vectorul ok ne spune daca ghiseul i este deschis (pe poz i avem 1)
 
 	while(fgets(line, 80, pf)){
-		/* Read the first word on each line in the input file and
-		   do the proper action for that command */
-		p = strtok(line, " \n");
+
+		p = strtok(line, " \n");	
+//citim primul cuvant de pe fiecare linie din fisier si vedem in ce caz ne aflam, in functie de asta deducem care sunt urmatoarele siruri de caractere pe care le transformam in numere si in numar de cate sunt acestea 
 
 		if(strcmp(p, "OPEN_WINDOW") == 0){
 
@@ -94,9 +94,7 @@ int main(int argc, char * argv[]){
 							w[win_id].process(g);
 
 						else{
-							/* if the weight of the current packet does not meet
-							   the requirements of the current counter stack, 
-							   look for the first open window after this one */
+						//daca greutatea pachetului nu se incadreaza in cerintele stivei ghiseului curent, cautam prima fereastra deschisa imediat dupa cea curenta
 							gasit = 0;
 							j = win_id + 1;
 
@@ -111,8 +109,7 @@ int main(int argc, char * argv[]){
 								j++;
 							}
 							
-							/* if there is no open window after the current 
-							   counter look before it */
+							//daca nu exista nicio fereastra deschisa dupa ghiseul curent, cautam inaintea lui
 							if(gasit == 0){
 								j = 0;
 								while(gasit == 0 && j < win_id ){

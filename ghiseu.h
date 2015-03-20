@@ -1,6 +1,7 @@
 #include "stack.h"
 
-
+/* A person whose request was registered
+ has these characteristics */
 struct Person{
 			int PERSONAL_ID;
 			int PACKAGE_WEIGHT;
@@ -11,11 +12,15 @@ struct Person{
 
 class Window{
 public:
-
-	struct Person *pFirst, *pLast; //coada este de fapt o lista dublu inlantuita intrucat exista legaturi intre elemente
+	/* The queue at the counter is represented as a linked list
+	   because there are some links between the elements */
+	struct Person *pFirst, *pLast; 
 
 	class Stack s;
 
+	/* Constructor for the Window class:
+		When first opened the window of a counter starts with an 
+		empty list of processed requests */
 	Window(){
 
 		pFirst = pLast = NULL;
@@ -24,12 +29,9 @@ public:
 
 	~Window(){
 
-	//	delete pFirst; 
-	//	delete pLast;
-
 	}
 
-
+	/* When opening a window -> initialize its attributes */
 	void open_window(int w_id, int min, int max, int nmax, int gmax){
 		
 			s.WINDOW_ID = w_id;
@@ -41,6 +43,7 @@ public:
 
 	}
 
+	/* Add person to the queue */
 	void add_person(int pers_id, int p_weight){
 			
 		struct Person *paux;
@@ -62,8 +65,8 @@ public:
         }
 
 
-
-	 void removeFirst(){ //folosita la procesare
+    /* Use that when processing a request */
+	 void removeFirst(){ 
 		struct Person *paux;
 
         if (pFirst != NULL) {
@@ -72,7 +75,6 @@ public:
            	if ( paux == NULL) 
 				pLast = NULL;
 
-         //   delete pFirst;
             pFirst = paux;
 
             if (pFirst != NULL) 
@@ -81,7 +83,7 @@ public:
     
 		}
 
-	//se proceseaza o anumita greutate g
+	/* Process some given weight g */
 	void process(int g){
 
 		Person *p;
@@ -98,7 +100,7 @@ public:
 	}
 
 
-	/*Intoarce 1 daca lista este vida, 0 altfel*/
+	/* If the list is empty return 1. Else return 0. */
 	int  eGoala(){
 		if(pFirst == NULL && pLast == NULL)
 			return 1;

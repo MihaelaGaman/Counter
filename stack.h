@@ -1,46 +1,39 @@
 #ifndef __STACK__H
 #define __STACK__H
 
-//#include "ghiseu.h"
-
-
-
+/* The stack of packets that each counter has */
 class Stack {
 	public:
-		// vectorul de stocare
+		/* Store array */
 		int *stackArray;
 
-		// pozitia in vector a varfului stivei, greutatea pe masura ce se adauga pachete
+		/* The position of the top of the stack in the array, 
+		   the weight while adding packets */
 		int topLevel, weight;
 
 		int WINDOW_ID, WEIGHT_MIN, WEIGHT_MAX, Q, K;
 
-
-		// constructor
+		/* constructor */
 		Stack() {
 			
 			topLevel = -1;
 			weight = 0;
-			
-		
 		}
 
-		// destructor
+		/* destructor */
 		~Stack() {
 			topLevel = 0;
 		}
 
-		// operator de adaugare
+		/* Use this to add packets from processed request */
 		void push(int x) {				
 
 			topLevel++;
 			weight = weight + x;
 			stackArray[topLevel] = x;
-			
-				
 		}
 
-		// operatorul de stergere
+		/* Remove packets from stack */
 		int pop() {
 			{
 
@@ -49,18 +42,15 @@ class Stack {
 				topLevel--;
 
 				return x;}
-
 			}
 
-		// operatorul de consultare
+		/* Find out what packet is in the top of the stack */
 		int peek() {
 			
 			return stackArray[topLevel];
-			
-
 		}
 
-		// operatorul de verificare dimensiune
+		/* Checks size of the stack and returns 1 if it is empty */
 		int isEmpty() {
 			
 			if(topLevel == -1)
@@ -69,6 +59,8 @@ class Stack {
 				return 0;
 		}
 
+		/* Return 1 if the stack is full -> aka the weight available is
+		   not enough to store the current packet */
 		int isFull(int g){
 			if(topLevel == Q || weight + g >= K)
 				return 1;
@@ -76,11 +68,6 @@ class Stack {
 				return 0;
 
 			}
-
-		
-			
-
-		
 };
 
 #endif // __STACK__H
