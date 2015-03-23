@@ -1,12 +1,45 @@
 Gaman Mihaela Petruta
 314CA
+	
+	For this assignment I have used 2 headers ghiseu.h and stack.h. 
+	These were then included into the third one: tema1.cpp.
 
-	In realizarea temei, am folosit 2 fisiere (ghiseu.h si stack.h) pe care le-am inclus apoi in cel de-al treilea fisier, si anume tema1.cpp.
+	Each counter (ghișeu) has a stack of packets. I implemented the
+	facilities offered by a stack into the stack.h file. So there I have:
+		-> push / pop operations
+		-> peek - take the value of the element at the top of the stack
+		-> functions to check whether the stack is empty / full 
+	
+	Whitin the ghiseu.h file there is a structure that keeps information about
+	a person sitting at queue in front of the window of some counter.
+	This information consists of:
+		-> PERSONAL_ID
+		-> PACKAGE_WEIGHT
 
-	In fisierul stack.h se afla o implementare a unei stive, de care m-am folosit ulterior in lucrul cu stiva de pachete a fiecarui ghiseu. Au fost implementate operatiile de adaugare(push)/eliminare(pop) din stiva, precum si peek - interogare a elementului din varful stivei si functii de verificare daca stiva e plina/goala.
+	Here I have also implemented a class for a counter with:
+		-> a double linked list acting like a queue
 
-	In fisierul ghiseu.h am o structura care retine informatiile despre o persoana aflata la coada, respectiv PERSONAL_ID si PACKAGE_WEIGHT. De asemenea, in acelasi fisier am implementat o clasa pentru un ghiseu. Aceasta clasa contine in primul rand implementarea unei liste dublu inlantuita care se comporta ca o coada, in sensul ca nu contine decat functiile de eliminare de la inceput si adaugare la sfarsit plus functie pentru a verifica daca lista e goala. In al doilea rand, am implementat, tot aici, functii care urmeaza sa fie utilizate in realizarea diverselor comenzi intalnite in fisierul de input. Astfel, avem: open_window, add_person, process si functiile de printare cozi/stive si de flushing. 
+	Another part of this file consists of functions called during parsing
+	the input file (with the commands):
+		-> open_window
+		-> add_person
+		-> process
+		-> print functions
+		-> flushing
 
-	Exista doua motive pentru care am ales implementarea cozii prin lista: faptul ca nu stiam nr maxim de persoane ce pot fi la coada, iar lista fiind alocata dinamic, aceasta nu mai reprezenta o problema si in plus pt ca in lista exista legaturi intre elemente si nu e nevoie sa elimini un element pentru a-i afla valoarea.
+	I have chosen the implementation of the queue using a double linked list
+	for 2 reasons:
+		1) the maximum number of persons standing at the queue was unknown
+	so a dynamically alocated list seemed the right thing to do
+		2) there are links between the elements of a list so you don't have
+	to remove an element to find out its value.
 
-	In fisierul tema1.cpp, am implementat functia principala, cu parametri (de fapt parametrul din linia de comanda care va fi numele fisierului de input). Deschid fisierul de input, citesc cu fgets primul string, il convertesc cu atoi in numar, si acesta va fi N. Dupa aceasta, consider vectorul ok care va fi plin cu zero initial, si pe masura ce deschid ghisee pun 1 pe pozitia corespunzatoare ghiseului deschis. Pe fiecare din urmatoarele linii ale fisierului citesc primul string si vad cu care din comenzile posibile se potriveste, si in functie de asta stiu cate stringuri (numere) urmeaza dupa el si ce reprezinta acestea si realizez scopul lor folosindu-ma de functiile din ghiseu.h, la care mai adaug unele conditii acolo unde este nevoie. 
+	In tema1.cpp file I have the main function having as argument the name of
+	the input file. I open the input file. Read the first string using fgets.
+	Convert it into number.
+	Then consider array ok full with 0 initially.
+	When I do open counters I set the element at that position in the ok array
+	to be 1.
+
+	In this main file I do the parsing too using the helper functions I have
+	implemented into the ghiseu.h file.
